@@ -41,7 +41,9 @@ module YaoPastaQ
 	genlist!(plist, blk::ControlBlock{2, XGate, 1, 1}, locs, controls) = push!(plist, ("CX", (blk.ctrl_locs[1], blk.locs[1])))
 	genlist!(plist, blk::ControlBlock{2, YGate, 1, 1}, locs, controls) = push!(plist, ("CY", (blk.ctrl_locs[1], blk.locs[1])))
 	genlist!(plist, blk::ControlBlock{2, ZGate, 1, 1}, locs, controls) = push!(plist, ("CZ", (blk.ctrl_locs[1], blk.locs[1])))
+	genlist!(plist, blk::ControlBlock{2, RotationGate{1, Float64, ZGate}, 1, 1}, locs, controls) = push!(plist, ("CRz", (blk.ctrl_locs[1], blk.locs[1]), (ϕ = blk.content.theta,)))
 	genlist!(plist, blk::SWAPGate, locs, controls) = push!(plist, ("SWAP", (locs[1], locs[2])))
+	#iSWAP, Rn, sqrt(X), CRn, sqrt(SWAP) gates are left
 	genlist!(plist, blk::ControlBlock{3, XGate, 2, 1}, locs, controls) = push!(plist, ("Toffoli", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.locs[1])))
 	genlist!(plist, blk::ControlBlock{3, SWAPGate, 1, 2}, locs, controls) = push!(plist, ("Fredkin", (blk.ctrl_locs[1], blk.locs[1], blk.locs[2])))
 	genlist!(plist, blk::ControlBlock{4, XGate, 3, 1}, locs, controls) = push!(plist, ("CCCNOT", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.ctrl_locs[3], blk.locs[1])))
