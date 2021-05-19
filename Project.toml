@@ -1,6 +1,6 @@
 name = "YaoPastaQ"
 uuid = "295aef9f-e68b-4375-90fc-eaec2cf620b6"
-authors = ["Roger-Luo <rogerluo.rl18@gmail.com> and contributors"]
+authors = ["Roger-Luo <rogerluo.rl18@gmail.com> and Chetan Vardhan <chetan.verdhan8@gmail.com>"]
 version = "0.1.0"
 
 [deps]
