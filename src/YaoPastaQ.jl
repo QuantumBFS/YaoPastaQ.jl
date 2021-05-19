@@ -3,11 +3,11 @@ module YaoPastaQ
 using YaoBase, YaoBlocks
 export genlist
 flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
-sublocs(subs, locs) = [locs[i] + 1 for i in subs]   
+sublocs(subs, locs) = [locs[i] for i in subs]   
 
 function genlist(x::AbstractBlock{N}) where N
     plist = []
-    genlist!(plist, flblock(x), [0:N - 1...], Int[])
+    genlist!(plist, flblock(x), [1:N...], Int[])
     return plist
 end
 
@@ -27,7 +27,7 @@ genlist!(plist, blk::HGate, locs, controls) = push!(plist, ("H", locs[1]))
 genlist!(plist, blk::ZGate, locs, controls) = push!(plist, ("Z", locs[1]))
 genlist!(plist, blk::Scale{Val{im}, 1, YGate}, locs, controls) = push!(plist, ("iY", locs[1]))
 genlist!(plist, blk::TGate, locs, controls) = push!(plist, ("π/8", locs[1]))
-                        
+
 function genlist!(plist, blk::ShiftGate{Float64}, locs, controls) 
     if blk.theta == π/2
         push!(plist, ("Phase", locs[1]))
