@@ -5,8 +5,12 @@ module YaoPastaQ
   	export genlist
 
 	flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
-	sublocs(subs, locs) = [locs[i] + 1 for i in subs]   
+	sublocs(subs, locs) = [locs[i] + 1 for i in subs]  
 
+	
+	"""
+	Converts abstract block to a list which can be run by PastaQ
+	"""
 	function genlist(x::AbstractBlock{N}) where N
 	    plist = []
 	    genlist!(plist, flblock(x), [0:N - 1...], Int[])
