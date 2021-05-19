@@ -1,4 +1,4 @@
-using YaoPastaQ
+using YaoPastaQ, Yao
 using Test
 
 @testset "YaoPastaQ.jl" begin
