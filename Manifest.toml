@@ -260,12 +260,6 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
-[[Yao]]
-deps = ["BitBasis", "Reexport", "YaoArrayRegister", "YaoBase", "YaoBlocks", "YaoSym"]
-git-tree-sha1 = "19803001db1fbcad77421e749eb28c086ef40ee9"
-uuid = "5872b779-8223-5990-8dd0-5abbb0748c8c"
-version = "0.6.3"
-
 [[YaoAPI]]
 git-tree-sha1 = "dc4edfcda2e59fd2624f84941da040a4e30220e3"
 uuid = "0843a435-28de-4971-9e8b-a9641b2983a8"
@@ -288,12 +282,6 @@ deps = ["BitBasis", "CacheServers", "ExponentialUtilities", "InteractiveUtils", 
 git-tree-sha1 = "dc31267d8895e10f69276dee029fea21503752ac"
 uuid = "418bc28f-b43b-5e0b-a6e7-61bbc1a2c1df"
 version = "0.11.3"
-
-[[YaoSym]]
-deps = ["BitBasis", "LinearAlgebra", "LuxurySparse", "Requires", "SparseArrays", "YaoArrayRegister", "YaoBase", "YaoBlocks"]
-git-tree-sha1 = "b19f5d48085aad7ce80c91e372d9c6b44b039e2a"
-uuid = "3b27209a-d3d6-11e9-3c0f-41eb92b2cb9d"
-version = "0.4.6"
 
 [[Zlib_jll]]
 deps = ["Libdl"]
