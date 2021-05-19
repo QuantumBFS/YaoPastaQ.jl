@@ -1,8 +1,8 @@
-using Yao, YaoBlocks
-
 module YaoPastaQ
+	
+	using Yao, YaoBlocks
 
-  export genlist
+  	export genlist
 
 	flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 	sublocs(subs, locs) = [locs[i] + 1 for i in subs]   
