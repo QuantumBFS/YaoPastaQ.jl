@@ -1,7 +1,7 @@
 module YaoPastaQ
 
-using YaoBase, YaoBlocks
-export genlist
+using YaoBase, YaoBlocks, PastaQ
+export genlist, apply!
 flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 sublocs(subs, locs) = [locs[i] for i in subs]   
 
@@ -61,4 +61,8 @@ genlist!(plist, blk::SWAPGate, locs, controls) = push!(plist, ("SWAP", (locs[1],
 genlist!(plist, blk::ControlBlock{3, XGate, 2, 1}, locs, controls) = push!(plist, ("Toffoli", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.locs[1])))
 genlist!(plist, blk::ControlBlock{3, SWAPGate, 1, 2}, locs, controls) = push!(plist, ("Fredkin", (blk.ctrl_locs[1], blk.locs[1], blk.locs[2])))
 genlist!(plist, blk::ControlBlock{4, XGate, 3, 1}, locs, controls) = push!(plist, ("CCCNOT", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.ctrl_locs[3], blk.locs[1])))
+
+struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister
+    state::State
+end
 end
