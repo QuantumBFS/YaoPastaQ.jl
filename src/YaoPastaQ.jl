@@ -66,7 +66,7 @@ struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}}
     state::State
 end
 
-PastaQReg(x::Number) = PastaQReg(productstate(x))
+PastaQReg(x::Int64) = PastaQReg(productstate(x))
 apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
 
 end
