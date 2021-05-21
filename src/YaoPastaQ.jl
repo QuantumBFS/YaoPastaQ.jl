@@ -68,6 +68,5 @@ end
 
 PastaQReg(x::Number) = PastaQReg(productstate(x))
 apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
-apply!(n::Number, x::AbstractBlock) = apply!(PastaQReg(n), x)
 
 end
