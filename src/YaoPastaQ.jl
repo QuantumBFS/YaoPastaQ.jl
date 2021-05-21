@@ -61,8 +61,13 @@ genlist!(plist, blk::SWAPGate, locs, controls) = push!(plist, ("SWAP", (locs[1],
 genlist!(plist, blk::ControlBlock{3, XGate, 2, 1}, locs, controls) = push!(plist, ("Toffoli", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.locs[1])))
 genlist!(plist, blk::ControlBlock{3, SWAPGate, 1, 2}, locs, controls) = push!(plist, ("Fredkin", (blk.ctrl_locs[1], blk.locs[1], blk.locs[2])))
 genlist!(plist, blk::ControlBlock{4, XGate, 3, 1}, locs, controls) = push!(plist, ("CCCNOT", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.ctrl_locs[3], blk.locs[1])))
-
-struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister
+    
+struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}}
     state::State
 end
+
+PastaQReg(x::Number) = PastaQReg(productstate(x))
+apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
+apply!(n::Number, x::AbstractBlock) = apply!(PastaQReg(n), x)
+
 end
