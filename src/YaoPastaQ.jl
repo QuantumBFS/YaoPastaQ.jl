@@ -67,6 +67,6 @@ struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}}
 end
 
 PastaQReg(x::Int64) = PastaQReg(productstate(x))
-apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
+YaoBase.apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
 
 end
