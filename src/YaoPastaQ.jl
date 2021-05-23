@@ -62,11 +62,15 @@ genlist!(plist, blk::ControlBlock{3, XGate, 2, 1}, locs, controls) = push!(plist
 genlist!(plist, blk::ControlBlock{3, SWAPGate, 1, 2}, locs, controls) = push!(plist, ("Fredkin", (blk.ctrl_locs[1], blk.locs[1], blk.locs[2])))
 genlist!(plist, blk::ControlBlock{4, XGate, 3, 1}, locs, controls) = push!(plist, ("CCCNOT", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.ctrl_locs[3], blk.locs[1])))
     
-struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}}
+struct PastaQRe{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister{1}
     state::State
 end
 
-PastaQReg(x::Int64) = PastaQReg(productstate(x))
-YaoBase.apply!(r::PastaQReg, x::AbstractBlock) = runcircuit(r.state, genlist(x))
+PastaQReg(x::Int64) = PastaQReg(productstate(x))  
+
+function apply!(r::PastaQReg, x::AbstractBlock)
+    r = runcircuit(r.state, genlist(x));
+    return r;
+end
 
 end
