@@ -11,7 +11,7 @@ PastaQ = "30b07047-aa8b-4c78-a4e8-24d720215c19"
 [compat]
 YaoBlocks = "0.11"
 YaoBase = "0.14"
-julia = "1.6.1"
+julia = "1.6"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
