@@ -1,6 +1,6 @@
 module YaoPastaQ
 
-import YaoBase, YaoBlocks, PastaQ
+using YaoBase, YaoBlocks, PastaQ
 export genlist, apply!, PastaQReg
 flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 sublocs(subs, locs) = [locs[i] for i in subs]   
