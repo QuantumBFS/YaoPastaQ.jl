@@ -1,7 +1,7 @@
 module YaoPastaQ
 
-using YaoBase, YaoBlocks, PastaQ
-export genlist, apply!, PastaQReg, @bit_str, nqubits, nactive, fidelity, measure, measure!
+import YaoBase, YaoBlocks, PastaQ
+export genlist, apply!, PastaQReg
 flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 sublocs(subs, locs) = [locs[i] for i in subs]   
 
@@ -81,14 +81,14 @@ Base.copy(r::PastaQReg) = PastaQReg(r)
 PastaQReg(r::PastaQReg) = PastaQReg(copy(r.state))
 YaoBase.fidelity(x::PastaQReg, y::PastaQReg) = PastaQ.fidelity(x.state, y.state)
 
-function YaoBase.measure(x::PastaQReg, nshots::Int=1024)
-    println(getsamples(x.state, nshots));
+function YaoBase.measure(x::PastaQReg, nshots::Int=1024)  
+    @show getsamples(x.state, nshots)  
     return x;
 end
 
 function YaoBase.measure!(x::PastaQReg, nshots::Int=1024)
-    y = getsamples(x.state, nshots)  
-    println(y)  
+    y = getsamples(x.state, nshots)
+    @show y
     return PastaQReg(productstate(length(y[end,:]), ["$i" for i in y[end,:]]))  
 end
 
