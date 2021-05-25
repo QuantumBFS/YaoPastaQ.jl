@@ -66,11 +66,12 @@ struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister{1}
     state::State
 end
 
-PastaQReg(x::Int64) = PastaQReg(productstate(x))  
+PastaQReg(x::Int64) = PastaQReg(productstate(x))
 
-function apply!(r::PastaQReg, x::AbstractBlock)
+function YaoBase.apply!(r::PastaQReg, x::AbstractBlock)
     r = runcircuit(r.state, genlist(x));
     return r;
 end
 
+PastaQReg(n::Int, x::YaoBlocks.BitStr) = PastaQReg(productstate(n, reverse(["$i" for i in x])))
 end
