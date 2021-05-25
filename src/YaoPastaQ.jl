@@ -81,15 +81,15 @@ Base.copy(r::PastaQReg) = PastaQReg(r)
 PastaQReg(r::PastaQReg) = PastaQReg(copy(r.state))
 YaoBase.fidelity(x::PastaQReg, y::PastaQReg) = PastaQ.fidelity(x.state, y.state)
 
-function YaoBase.measure(x::PastaQReg, nshots::Int=1024)  
-    @show getsamples(x.state, nshots)  
+function YaoBase.measure(x::PastaQReg, nshots::Int=1024)
+    show(stdout, "text/plain", getsamples(x.state, nshots))
     return x;
 end
 
 function YaoBase.measure!(x::PastaQReg, nshots::Int=1024)
     y = getsamples(x.state, nshots)
-    @show y
-    return PastaQReg(productstate(length(y[end,:]), ["$i" for i in y[end,:]]))  
+    show(stdout, "text/plain", y)
+    return PastaQReg(productstate(length(y[end,:]), ["$i" for i in y[end,:]]))
 end
 
 end
