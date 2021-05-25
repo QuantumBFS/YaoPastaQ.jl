@@ -89,8 +89,8 @@ end
 function YaoBase.measure!(x::PastaQReg, nshots::Int=1024)
     y = getsamples(x.state, nshots)
     display(y)
-    return PastaQReg(productstate(length(y[end,:]), ["$i" for i in y[end,:]]))
+    x = PastaQReg(productstate(length(y[end,:]), ["$i" for i in y[end,:]]));
+    return x;
 end
-
 
 end
