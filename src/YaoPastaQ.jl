@@ -70,7 +70,7 @@ PastaQReg(x::Int64) = PastaQReg(productstate(x))
 
 function YaoBase.apply!(r::PastaQReg, x::AbstractBlock)
     r = runcircuit(r.state, genlist(x));
-    return r;
+    return PastaQReg(r);
 end
 
 YaoBase.nqubits(r::PastaQReg) = length(r.state)
