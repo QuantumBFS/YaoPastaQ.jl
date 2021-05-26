@@ -14,6 +14,6 @@ using Test
     @test genlist(testgate2) == Any[("CCCNOT", (1, 2, 3, 4))]
     @test nqubits(PastaQReg(3)) == 3
     @test PastaQReg(3) isa PastaQReg{MPS}
-    @test measure(PastaQReg(3)) isa PastaQReg{MPS}
+    @test measure(PastaQReg(3), 3) == [0 0 0; 0 0 0; 0 0 0]
     @test apply!(PastaQReg(3), chain(3, put(1=>X))) isa PastaQReg{MPS}
 end
