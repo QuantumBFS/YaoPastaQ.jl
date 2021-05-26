@@ -16,4 +16,6 @@ using Test
     @test PastaQReg(3) isa PastaQReg{MPS}
     @test measure(PastaQReg(3), 3) == [0 0 0; 0 0 0; 0 0 0]
     @test apply!(PastaQReg(3), chain(3, put(1=>X))) isa PastaQReg{MPS}
+    @test PastaQReg(YaoBase.bit"0011") isa PastaQReg{MPS}
+    @test fidelity(PastaQReg(3), PastaQReg(3)) == 1.0
 end
