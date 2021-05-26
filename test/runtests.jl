@@ -1,4 +1,5 @@
 using YaoPastaQ, Yao
+using PastaQ: MPS, productstate
 using Test
 
 @testset "YaoPastaQ.jl" begin
@@ -11,4 +12,13 @@ using Test
     
     @test genlist(testgate) == Any[("X", 2), ("iY", 3), ("H", 1), ("H", 2), ("X", 1), ("Phase", 1), ("π/8", 1), ("Rx", 3, (θ = 1.0471975511965976,)), ("SWAP", (1, 2)), ("Toffoli", (1, 2, 3)), ("CRz", (1, 3), (ϕ = 1.0471975511965976,)), ("CY", (1, 2)), ("Fredkin", (1, 2, 3))]
     @test genlist(testgate2) == Any[("CCCNOT", (1, 2, 3, 4))]
+    @test nqubits(PastaQReg(3)) == 3
+    @test PastaQReg(3) isa PastaQReg{MPS}
+    @test measure(PastaQReg(3), 3) == [0 0 0; 0 0 0; 0 0 0]
+    @test apply!(PastaQReg(3), chain(3, put(1=>X))) isa PastaQReg{MPS}
+    @test PastaQReg(YaoBase.bit"0011") isa PastaQReg{MPS}
+    @test fidelity(PastaQReg(3), PastaQReg(3)) == 1.0
+    @test nactive(PastaQReg(YaoBase.bit"0011")) == 4
+    @test PastaQReg(PastaQReg(3)) isa PastaQReg{MPS}
+    @test PastaQReg(productstate(3)) isa PastaQReg{MPS}
 end
