@@ -21,12 +21,12 @@ function genlist!(plist, blk::PutBlock{N,M}, locs, controls) where {N,M}
     genlist!(plist, blk.content, sublocs(blk.locs, locs), controls)
 end
 
-genlist!(plist, blk::XGate, locs, controls) = push!(plist, ("X", locs[1]))
-genlist!(plist, blk::YGate, locs, controls) = push!(plist, ("Y", locs[1]))
-genlist!(plist, blk::HGate, locs, controls) = push!(plist, ("H", locs[1]))
-genlist!(plist, blk::ZGate, locs, controls) = push!(plist, ("Z", locs[1]))
-genlist!(plist, blk::Scale{Val{im}, 1, YGate}, locs, controls) = push!(plist, ("iY", locs[1]))
-genlist!(plist, blk::TGate, locs, controls) = push!(plist, ("π/8", locs[1])) 
+genlist!(plist, ::XGate, locs, controls) = push!(plist, ("X", locs[1]))
+genlist!(plist, ::YGate, locs, controls) = push!(plist, ("Y", locs[1]))
+genlist!(plist, ::HGate, locs, controls) = push!(plist, ("H", locs[1]))
+genlist!(plist, ::ZGate, locs, controls) = push!(plist, ("Z", locs[1]))
+genlist!(plist, ::Scale{Val{im}, 1, YGate}, locs, controls) = push!(plist, ("iY", locs[1]))
+genlist!(plist, ::TGate, locs, controls) = push!(plist, ("π/8", locs[1])) 
 
 function genlist!(plist, blk::ShiftGate{Float64}, locs, controls)
     if blk.theta == π/2
@@ -62,15 +62,15 @@ genlist!(plist, blk::ControlBlock{3, XGate, 2, 1}, locs, controls) = push!(plist
 genlist!(plist, blk::ControlBlock{3, SWAPGate, 1, 2}, locs, controls) = push!(plist, ("Fredkin", (blk.ctrl_locs[1], blk.locs[1], blk.locs[2])))
 genlist!(plist, blk::ControlBlock{4, XGate, 3, 1}, locs, controls) = push!(plist, ("CCCNOT", (blk.ctrl_locs[1], blk.ctrl_locs[2], blk.ctrl_locs[3], blk.locs[1])))
     
-struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister{1}
+mutable struct PastaQReg{State <: Union{PastaQ.MPS, PastaQ.MPO}} <: AbstractRegister{1}
     state::State
 end
 
 PastaQReg(x::Int64) = PastaQReg(productstate(x))
 
 function YaoBase.apply!(r::PastaQReg, x::AbstractBlock)
-    r = runcircuit(r.state, genlist(x));
-    return PastaQReg(r);
+    r.state = runcircuit(r.state, genlist(x))
+    return r
 end
 
 YaoBase.nqubits(r::PastaQReg) = length(r.state)
