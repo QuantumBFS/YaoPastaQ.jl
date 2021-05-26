@@ -1,4 +1,5 @@
-using YaoPastaQ, Yao, PastaQ
+using YaoPastaQ, Yao
+using PastaQ: MPS
 using Test
 
 @testset "YaoPastaQ.jl" begin
