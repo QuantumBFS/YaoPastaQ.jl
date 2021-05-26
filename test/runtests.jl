@@ -1,5 +1,5 @@
 using YaoPastaQ, Yao
-using PastaQ: MPS
+using PastaQ: MPS, productstate
 using Test
 
 @testset "YaoPastaQ.jl" begin
@@ -18,4 +18,7 @@ using Test
     @test apply!(PastaQReg(3), chain(3, put(1=>X))) isa PastaQReg{MPS}
     @test PastaQReg(YaoBase.bit"0011") isa PastaQReg{MPS}
     @test fidelity(PastaQReg(3), PastaQReg(3)) == 1.0
+    @test nactive(PastaQReg(YaoBase.bit"0011")) == 4
+    @test PastaQReg(PastaQReg(3)) isa PastaQReg{MPS}
+    @test PastaQReg(productstate(3)) isa PastaQReg{MPS}
 end
