@@ -26,7 +26,8 @@ genlist!(plist, ::YGate, locs, controls) = push!(plist, ("Y", locs[1]))
 genlist!(plist, ::HGate, locs, controls) = push!(plist, ("H", locs[1]))
 genlist!(plist, ::ZGate, locs, controls) = push!(plist, ("Z", locs[1]))
 genlist!(plist, ::Scale{Val{im}, 1, YGate}, locs, controls) = push!(plist, ("iY", locs[1]))
-genlist!(plist, ::TGate, locs, controls) = push!(plist, ("π/8", locs[1])) 
+genlist!(plist, ::TGate, locs, controls) = push!(plist, ("π/8", locs[1]))
+genlist!(plist, ::ConstGate.SGate, locs, controls) = push!(plist, ("PhaseGate", locs[1])) 
 
 function genlist!(plist, blk::ShiftGate{Float64}, locs, controls)
     if blk.theta == π/2
