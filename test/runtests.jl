@@ -6,6 +6,7 @@ using Test
     @test genlist(chain(3, put(2 => X), repeat(X, 1:3))) ==  Any[("X", 2), ("X", 1), ("X", 2), ("X", 3)] 
     @test genlist(chain(3, put(2 => Y), repeat(Y, 1:3), put(1:3 => chain(3, put(1=>X))))) == Any[("Y", 2), ("Y", 1), ("Y", 2), ("Y", 3), ("X", 1)] 
     @test genlist(chain(3, put(1 => H), repeat(H, 1:3), put(1:3 => chain(3, put(1 => Z))))) == Any[("H", 1), ("H", 1), ("H", 2), ("H", 3), ("Z", 1)] 
+    @test genlist(chain(3, kron(X, Y, ConstGate.S))) == Any[("X", 1), ("Y", 2), ("Phase", 3)] 
     
     testgate = chain(3, put(2 => X), put(3 => im*Y), repeat(H, 1:2), put(1:2 => chain(2, put(1 => X))), put(1 => shift(π/2)), put(1 => shift(π/4)), put(3=>Rx(π/3)), swap(1,2), control(1:2, 3=>X), control(1, 3=>Rz(π/3)), control(1, 2=>Y), control(1, 2:3=>SWAP)) 
     testgate2 = chain(4, control(1:3, 4=>X)) 
