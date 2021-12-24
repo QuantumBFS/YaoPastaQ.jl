@@ -5,6 +5,9 @@ export genlist, apply!, PastaQReg
 flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 sublocs(subs, locs) = [locs[i] for i in subs]   
 
+"""
+Translate from Yao's QBIR to the input list in PastaQ
+"""
 function genlist(x::AbstractBlock{N}) where N
     plist = []
     genlist!(plist, flblock(x), [1:N...], Int[])
