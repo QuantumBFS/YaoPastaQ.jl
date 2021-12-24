@@ -6,7 +6,7 @@ flblock(blk::AbstractBlock) = YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.
 sublocs(subs, locs) = [locs[i] for i in subs]   
 
 """
-Translate from Yao's QBIR to the input list in PastaQ
+Returns the PastaQ input list from Yao's QBIR
 """
 function genlist(x::AbstractBlock{N}) where N
     plist = []
