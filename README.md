@@ -8,7 +8,7 @@
 To install, in the Julia REPL do
 
 ```julia
-julia> add YaoPastaQ
+julia> add https://github.com/QuantumBFS/YaoPastaQ.jl
 ```
 
 For usage:
